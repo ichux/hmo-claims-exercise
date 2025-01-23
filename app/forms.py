@@ -1,15 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import (
-    DateField,
-    IntegerField,
-    RadioField,
-    StringField,
-    validators,
-)
-
-from app.models import User
-
-all_users = User.query.with_entities(User.name).all()
+from wtforms import DateField, IntegerField, RadioField, StringField, validators
 
 
 class AddUser(FlaskForm):
