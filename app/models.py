@@ -28,6 +28,7 @@ class Claim(database.Model):
     diagnosis = database.Column(database.String(1000))
     hmo = database.Column(database.String(4))
     age = database.Column(database.Integer, nullable=True)
+    is_male = database.Column(database.Boolean, nullable=True)
     service_charge = database.Column(database.Integer)
     total_cost = database.Column(database.Integer)
     final_cost = database.Column(database.Integer)

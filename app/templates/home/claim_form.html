@@ -1,0 +1,74 @@
+{% extends "home/base.html" %} {% block title %}Create Claim{% endblock %} {%
+block body %}
+<form method="POST" class="form-group claim-form">
+  <!-- Patient Data Section -->
+  <h3>Patient Data</h3>
+  <label for="patient">Patient Full Name:</label>
+  <select id="patient" name="patient">
+    {% for patient in patients %}
+    <option value="{{ patient.id }}">{{ patient.full_name }}</option>
+    {% endfor %}
+  </select>
+  <label for="age">Patient Age:</label>
+  <input type="number" id="age" name="age" readonly />
+  <label for="gender">Patient Gender:</label>
+  <input type="radio" id="male" name="gender" value="1" /> Male
+  <input type="radio" id="female" name="gender" value="0" /> Female
+  <label for="diagnosis">Diagnosis:</label>
+  <textarea id="diagnosis" name="diagnosis"></textarea>
+  <label for="hmo">Select HMO provider:</label>
+  <select id="hmo" name="hmo">
+    <option value="HMO1">HMO1</option>
+    <option value="HMO2">HMO2</option>
+    <option value="HMO3">HMO3</option>
+    <option value="HMO4">HMO4</option>
+  </select>
+
+  <!-- Services Provided Section -->
+  <h3>Services Provided</h3>
+  <div id="services">
+    <div class="service">
+      <label for="service_date">Service Date:</label>
+      <input
+        type="text"
+        id="service_date"
+        name="service_date[]"
+        placeholder="DD-MM-YYYY"
+      />
+      <label for="service_name">Service Name:</label>
+      <input type="text" id="service_name" name="service_name[]" />
+      <label for="service_type">Service Type:</label>
+      <input type="checkbox" name="service_type[]" value="Hematology" />
+      Hematology
+      <input type="checkbox" name="service_type[]" value="Microbiology" />
+      Microbiology
+      <input type="checkbox" name="service_type[]" value="Chemical Pathology" />
+      Chemical Pathology
+      <input type="checkbox" name="service_type[]" value="Histopathology" />
+      Histopathology
+      <input type="checkbox" name="service_type[]" value="Immunology" />
+      Immunology
+      <label for="provider_name">Provider Name:</label>
+      <input type="text" id="provider_name" name="provider_name[]" />
+      <label for="source">Source:</label>
+      <input type="text" id="source" name="source[]" />
+      <label for="cost">Cost of Service:</label>
+      <input type="number" id="cost" name="cost[]" onkeyup="calculateTotal()" />
+    </div>
+  </div>
+  <button type="button" onclick="addService()">Add Another Service</button>
+
+  <!-- Total Cost Section -->
+  <h3>Total Cost</h3>
+  <label for="total_cost">Total Cost:</label>
+  <input type="number" id="total_cost" name="total_cost" readonly />
+  <label for="service_charge">Service Charge (10%):</label>
+  <input type="number" id="service_charge" name="service_charge" readonly />
+  <label for="final_cost">Final Cost:</label>
+  <input type="number" id="final_cost" name="final_cost" readonly />
+
+  <button type="submit">Submit Claim</button>
+</form>
+
+<script src="{{ url_for('static', filename='js/claim.js') }}"></script>
+{% endblock %}
