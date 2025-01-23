@@ -15,8 +15,8 @@ def all_users():
     """
     List all Users
     """
-    all_users = User.query.all()
-    return render_template("home/home.html", users=all_users, title="Users")
+    data = User.query.all()
+    return render_template("home/home.html", users=data, title="Users")
 
 
 @home_blueprint.route("/user/<int:id>", methods=["GET", "POST"])
@@ -178,8 +178,8 @@ def create_claim():
         flash("Claim created successfully.", "success")
         return redirect(url_for("home.claim"))
     else:
-        all_users = User.query.with_entities(User.name).all()
-        return render_template("home/create_claim.html", all_users=all_users)
+        data = User.query.with_entities(User.name).all()
+        return render_template("home/create_claim.html", all_users=data)
 
 
 @home_blueprint.route("create_claim/age/", methods=["POST"])
