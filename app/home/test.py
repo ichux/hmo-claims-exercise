@@ -1,8 +1,10 @@
 import unittest
-from unittest.mock import patch
 from datetime import datetime
-from app import application as app, database
-from app.models import User, Claim, Service
+from unittest.mock import patch
+
+from app import application as app
+from app import database
+from app.models import Claim, Service, User
 
 
 class TestViews(unittest.TestCase):
@@ -71,7 +73,6 @@ class TestViews(unittest.TestCase):
             # response = edit_user(self.user.id)
             # self.assertEqual(response.status_code, 200)
             # self.assertIn(b"User updated successfully.", response.data)
-
             # Verify the user is updated in the database
             updated_user = User.query.get(self.user.id)
             self.assertEqual(updated_user.name, "Updated User")
