@@ -52,13 +52,13 @@ def edit_user(id):
         salary = request.form.get("salary")
         date_of_birth = request.form.get("date_of_birth")
 
-        dt_obj = datetime.strptime(date_of_birth, "%Y-%m-%d")
+        dt_obj = datetime.strptime(date_of_birth, "%Y-%m-%d").strftime("%d-%m-%Y")
 
         if form.validate_on_submit():
             user_data.name = name
             user_data.gender = gender
             user_data.salary = salary
-            user_data.date_of_birth = dt_obj
+            user_data.date_of_birth = datetime.strptime(dt_obj, "%d-%m-%Y")
 
             database.session.commit()
 
@@ -82,14 +82,14 @@ def add_user():
         salary = request.form.get("salary")
         date_of_birth = request.form.get("date_of_birth")
 
-        dt_obj = datetime.strptime(date_of_birth, "%Y-%m-%d")
+        dt_obj = datetime.strptime(date_of_birth, "%Y-%m-%d").strftime("%d-%m-%Y")
 
         if form.validate_on_submit():
             new_user = User(
                 name=name,
                 gender=gender,
                 salary=salary,
-                date_of_birth=dt_obj,
+                date_of_birth=datetime.strptime(dt_obj, "%d-%m-%Y"),
             )
             database.session.add(new_user)
             database.session.commit()
@@ -155,6 +155,7 @@ def create_claim():
         final_cost = request.form.get("final_cost")
 
         user = User.query.filter_by(name=user).first()
+        current_app.logger.warning(user)
         # age = dt.date.today().year - user.date_of_birth.year
         new_claim = Claim(
             user_id=user.id,
@@ -181,7 +182,8 @@ def create_claim():
         # Format dates
         service_date = []
         for d in dates:
-            service_date.append(datetime.strptime(d, "%Y-%m-%d"))
+            current_app.logger.warning(d)
+            service_date.append(datetime.strptime(d, "%Y-%m-%d").strftime("%d-%m-%Y"))
         print("Anthony", service_date)
 
         # Get the above claim as foreign key for services
@@ -191,7 +193,7 @@ def create_claim():
         for i in range(len(service_name)):
             new_service = Service(
                 claim_id=claim.id,
-                service_date=service_date[i],
+                service_date=datetime.strptime(service_date[i], "%d-%m-%Y"),
                 service_name=service_name[i],
                 type=service_type[i],
                 provider_name=provider_name[i],
@@ -209,7 +211,7 @@ def create_claim():
 
 
 @home_blueprint.route("view_claim", methods=["GET", "POST"])
-def view_claims():
+def view_claim():
     claims = Claim.query.all()
     return render_template("home/view_claims.html", claims=claims)
 

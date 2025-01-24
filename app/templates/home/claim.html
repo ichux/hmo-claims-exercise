@@ -1,37 +1,47 @@
-{% extends "home/base.html" %} {% block title %}All Users{% endblock %} {% block
-body %}
-<div class="panel-list">
-  <h3 class="ml-2 mt-3 text-center">All Claims</h3>
-  <div class="row row-content">
-    <div class="table-responsive-sm col-12">
-      {% if claims|length > 0 %}
-      <table class="table table-sm table-panel table-desktop" id="userTable">
-        <thead class="">
-          <tr>
-            <th scope="col th-sm">S/N</th>
-            <th scope="col th-sm">Name</th>
-            <th scope="col th-sm">Salary</th>
-            <th scope="col th-sm">Date Joined</th>
-            <th scope="col th-sm">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for claim in claims %}
-          <tr>
-            <td>{{ claim.user.name }}</td>
-            <td>{{ claim.hmo }}</td>
-            <td>{{ claim.total_cost }}</td>
-            <td>{{ claim.status }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      {% else %}
-      <div class="text-center empty-table" style="display: block">
-        No Claims to display
-      </div>
-      {% endif %}
-    </div>
-  </div>
-</div>
-{% endblock %}
+{% extends "home/base.html" %}
+{% block title %}All Users{% endblock %}
+{% block
+    body %}
+    <div class="panel-list">
+        <h3 class="ml-2 mt-3 text-center">All Claims</h3>
+        <div class="row row-content">
+            <div class="table-responsive-sm col-12">
+                {% if claims|length > 0 %}
+                    <table class="table table-sm table-panel table-desktop" id="userTable">
+                        <thead class="">
+                            <tr>
+                                <th scope="col th-sm">S/N</th>
+                                <th scope="col th-sm">Name</th>
+                                <th scope="col th-sm">Total cost</th>
+                                <th scope="col th-sm">Status</th>
+                                <th scope="col th-sm">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for claim in claims %}
+                                <tr>
+                                    <td>{{ claim.user.name }}</td>
+                                    <td>{{ claim.hmo }}</td>
+                                    <td>{{ claim.final_cost }}</td>
+                                    <td>{{ claim.status }}</td>
+                                    <td>
+                                        <a>
+                                            <span class="material-icons outlined">visibility</span>
+                                        </a>
+                                        <a href="">
+                                            <span class="material-icons outlined">edit</span>
+                                        </a>
+                                        <a type="button" data-toggle="modal" data-target="#DeleteModal">
+                                            <span class="material-icons outlined">delete</span>
+                                        </a>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <div class="text-center empty-table" style="display: block">No Claims to display</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endblock %}

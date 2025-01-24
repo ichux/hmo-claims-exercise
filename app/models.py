@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from sqlalchemy import Enum
+
 from app import database
 
 
@@ -32,6 +34,9 @@ class Claim(database.Model):
     service_charge = database.Column(database.Integer)
     total_cost = database.Column(database.Integer)
     final_cost = database.Column(database.Integer)
+    status = database.Column(
+        Enum("in progress", "sent", "paid"), nullable=False, default="in progress"
+    )
     user = database.relationship("User", backref="")
     service = database.relationship("Service", backref="")
 
@@ -45,7 +50,7 @@ class Service(database.Model):
     id = database.Column(database.Integer, autoincrement=True, primary_key=True)
     claim_id = database.Column(database.Integer, database.ForeignKey("claim.id"))
     service_date = database.Column(
-        database.DateTime, nullable=False, default=datetime.utcnow
+        database.DateTime, nullable=False, default=datetime.now()
     )
     service_name = database.Column(database.String(100), nullable=False, unique=True)
     type = database.Column(database.String(50), nullable=False, unique=True)
