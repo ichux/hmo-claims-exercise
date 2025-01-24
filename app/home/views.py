@@ -156,7 +156,7 @@ def create_claim():
 
         user = User.query.filter_by(name=user).first()
         current_app.logger.warning(user)
-        # age = dt.date.today().year - user.date_of_birth.year
+
         new_claim = Claim(
             user_id=user.id,
             diagnosis=diagnosis,
@@ -227,4 +227,4 @@ def user_gender_age():
         age = dt.date.today().year - user.date_of_birth.year
 
         return jsonify({"age": age, "gender": user.gender})
-    return jsonify({"messahe": "Please use POST request"})
+    return jsonify({"message": "Please use POST request"})
