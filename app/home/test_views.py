@@ -1,10 +1,9 @@
 import unittest
 from datetime import datetime
-from unittest.mock import patch
 
 from app import application as app
 from app import database
-from app.models import Claim, Service, User
+from app.models import User
 
 
 class TestViews(unittest.TestCase):
