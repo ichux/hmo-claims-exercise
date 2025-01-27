@@ -7,9 +7,9 @@
             <table class="table table-sm table-panel table-desktop" id="userTable">
                 <thead class="">
                     <tr>
-                        <th scope="col th-sm">Claimant</th>
+                        <th scope="col th-sm">Patient</th>
                         <th scope="col th-sm">HMO</th>
-                        <th scope="col th-sm">Final cost</th>
+                        <th scope="col th-sm">Total cost</th>
                         <th scope="col th-sm">Status</th>
                         <th scope="col th-sm">Action</th>
                     </tr>
@@ -19,14 +19,11 @@
                     <tr>
                         <td>{{ claim.user.name }}</td>
                         <td>{{ claim.hmo }}</td>
-                        <td>{{ claim.final_cost }}</td>
+                        <td>{{ claim.total_cost }}</td>
                         <td>{{ claim.status }}</td>
                         <td>
-                            <a href="">
-                                <span class="material-icons outlined">edit</span>
-                            </a>
-                            <a type="button" data-toggle="modal" data-target="#DeleteModal">
-                                <span class="material-icons outlined">delete</span>
+                            <a>
+                                <span class="material-icons outlined">visibility</span>
                             </a>
                         </td>
                     </tr>
