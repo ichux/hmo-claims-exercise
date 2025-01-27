@@ -25,4 +25,5 @@
 - disabled future dates on new service additions
 - utilized options instead of checkbox to reduce possibility of clash and errors.
 - added form validation by making the required form fields required.
+- added error handling for the endpoints.
 ```

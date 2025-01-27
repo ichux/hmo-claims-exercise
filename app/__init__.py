@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, render_template
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
@@ -29,3 +29,15 @@ Migrate(
 from .home import home as home_blueprint
 
 application.register_blueprint(home_blueprint, url_prefix="/home")
+
+
+@application.errorhandler(404)
+# Custom error handler for 404 Not Found
+def not_found_error(error):
+    return render_template("errors/404.html"), 404
+
+
+# Custom error handler for 500 Internal Server Error
+@application.errorhandler(500)
+def internal_error(error):
+    return render_template("errors/500.html"), 500
