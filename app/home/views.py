@@ -210,12 +210,6 @@ def create_claim():
         return render_template("home/create_claim.html", all_users=data)
 
 
-@home_blueprint.route("view_claim", methods=["GET", "POST"])
-def view_claim():
-    claims = Claim.query.all()
-    return render_template("home/view_claims.html", claims=claims)
-
-
 @home_blueprint.route("create_claim/patient_data/", methods=["POST"])
 def user_gender_age():
     """
