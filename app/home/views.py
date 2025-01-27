@@ -14,7 +14,6 @@ from flask import (
 from app import database
 from app.forms import AddUser
 from app.models import Claim, Service, User
-
 from . import home as home_blueprint
 
 
@@ -24,7 +23,6 @@ def all_users():
     List all Users
     """
     data = User.query.all()
-    current_app.logger.warning(current_app.config.get("SQLALCHEMY_DATABASE_URI"))
     return render_template("home/home.html", users=data, title="Users")
 
 
@@ -33,7 +31,7 @@ def view_user(id):
     """
     A route that allows claim officer fillout a form for a particular user
     """
-    user_data = User.query.get(int(id))
+    user_data = User.query.get(id)
     return render_template("home/user_data.html", user_data=user_data)
 
 
@@ -44,7 +42,7 @@ def edit_user(id):
     """
     form = AddUser()
 
-    user_data = User.query.get(int(id))
+    user_data = User.query.get(id)
 
     if request.method == "POST":
         name = request.form.get("name")
@@ -108,7 +106,7 @@ def delete_user(id):
     """
     A route for deleting a user
     """
-    user_data = User.query.get(int(id))
+    user_data = User.query.get(id)
     if user_data:
         # Delete all associated claims and services
         for claim in user_data.claim:
@@ -132,7 +130,6 @@ def claim():
     List all Claims
     """
     all_claims = Claim.query.all()
-    current_app.logger.warning(all_claims)
     return render_template("home/claim.html", claims=all_claims, title="Claims")
 
 
@@ -184,7 +181,6 @@ def create_claim():
         for d in dates:
             current_app.logger.warning(d)
             service_date.append(datetime.strptime(d, "%Y-%m-%d").strftime("%d-%m-%Y"))
-        print("Anthony", service_date)
 
         # Get the above claim as foreign key for services
         claim = Claim.query.order_by(Claim.id.desc()).first()
