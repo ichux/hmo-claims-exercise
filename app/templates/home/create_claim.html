@@ -181,7 +181,9 @@
         </div>
     </form>
 </div>
-    <script>var today = new Date().toISOString().split('T')[0];
-    document.querySelector('input[name="service_date"]').setAttribute('max', today);</script>
+<script>
+    var today = new Date().toISOString().split("T")[0];
+    document.querySelector('input[name="service_date"]').setAttribute("max", today);
+</script>
 <script src="{{ url_for('static', filename='js/claim.js') }}"></script>
 {% endblock %}
