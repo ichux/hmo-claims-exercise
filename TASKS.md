@@ -10,7 +10,7 @@
 
 # Workings
 ```bash
-
+- removed redundant conversion to int for views
 - tried not to install more libraries
 - updated the existing ones I found since they're dated
 - used Python 3.12
