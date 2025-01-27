@@ -1,7 +1,15 @@
 import datetime as dt
 from datetime import datetime
 
-from flask import flash, jsonify, redirect, render_template, request, url_for
+from flask import (
+    current_app,
+    flash,
+    jsonify,
+    redirect,
+    render_template,
+    request,
+    url_for,
+)
 
 from app import database
 from app.forms import AddUser
@@ -195,6 +203,26 @@ def create_claim():
     else:
         data = User.query.with_entities(User.name).all()
         return render_template("home/create_claim.html", all_users=data)
+
+
+@home_blueprint.route("/claim/<int:id>", methods=["GET"])
+def view_claim(id):
+    """
+    List Claim by id
+    """
+    claim = Claim.query.get(id)
+    user = User.query.get(claim.user_id)
+    services = Service.query.filter_by(claim_id=claim.id).all()
+    user_age = dt.date.today().year - user.date_of_birth.year
+
+    return render_template(
+        "home/view_claim.html",
+        claim=claim,
+        user=user,
+        services=services,
+        user_age=user_age,
+        title="Claim",
+    )
 
 
 @home_blueprint.route("create_claim/patient_data/", methods=["POST"])

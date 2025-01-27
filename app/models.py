@@ -41,7 +41,7 @@ class Claim(database.Model):
     service = database.relationship("Service", backref="")
 
     def __repr__(self):
-        return "<CLaim: {}>".format(self.service)
+        return "<Claim: {}>".format(self.service)
 
 
 class Service(database.Model):

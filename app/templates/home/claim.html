@@ -22,7 +22,7 @@
                         <td>{{ claim.total_cost }}</td>
                         <td>{{ claim.status }}</td>
                         <td>
-                            <a>
+                            <a href="{{ url_for('home.view_claim', id=claim.id) }}">
                                 <span class="material-icons outlined">visibility</span>
                             </a>
                         </td>
