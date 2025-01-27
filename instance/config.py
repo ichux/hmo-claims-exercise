@@ -23,6 +23,22 @@ class IntronConfig(Config):
         "test": 'sqlite:///' + os.path.join(test_directory_path, 'intron_db.db')
     }
 
+class TestConfig(IntronConfig):
+    """
+    Configurations for unit testing
+    """
+    DEBUG = False
+    TESTING = True
+    SQLALCHEMY_ECHO = False
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    SQLALCHEMY_BINDS = {
+        "test": 'sqlite:///:memory:'
+    }
+    CSRF_ENABLED = False
+    SECRET_KEY = Config.SECRET_KEY
+
 app_config = {
-    'config': IntronConfig
+    'config': IntronConfig,
+    'test': TestConfig
 }
+
