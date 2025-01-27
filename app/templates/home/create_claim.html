@@ -97,21 +97,14 @@
                 </div>
                 <div class="col-sm-8">
                     <div class="form-group">
-                        <input type="radio" id="type" name="type" value="Hematology" required />
-                        <label for="vehicle1">Hematology</label>
-                        <br />
-                        <input type="radio" id="type" name="type" value="Microbiology" required />
-                        <label for="vehicle2">Microbiology</label>
-                        <br />
-                        <input type="radio" id="type" name="type" value="Chemical Pathology" required />
-                        <label for="vehicle3">Chemical Pathology</label>
-                        <br />
-                        <input type="radio" id="type" name="type" value="Histopathology" required />
-                        <label for="vehicle3">Histopathology</label>
-                        <br />
-                        <input type="radio" id="type" name="type" value="Immunology" required />
-                        <label for="vehicle3">Immunology</label>
-                        <br />
+                        <select name="type" id="type" class="form-control" required>
+                            <option value="">Select service type</option>
+                            <option value="Hematology">Hematology</option>
+                            <option value="Microbiology">Microbiology</option>
+                            <option value="Chemical Pathology">Chemical Pathology</option>
+                            <option value="Histopathology">Histopathology</option>
+                            <option value="Immunology">Immunology</option>
+                        </select>
                     </div>
                 </div>
             </div>
