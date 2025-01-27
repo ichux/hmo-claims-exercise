@@ -2,7 +2,6 @@ import datetime as dt
 from datetime import datetime
 
 from flask import (
-    current_app,
     flash,
     jsonify,
     redirect,
@@ -14,7 +13,6 @@ from flask import (
 from app import database
 from app.forms import AddUser
 from app.models import Claim, Service, User
-
 from . import home as home_blueprint
 
 
