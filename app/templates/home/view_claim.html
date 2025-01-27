@@ -1,0 +1,91 @@
+{% extends "home/base.html" %} {% block title %} Claim {% endblock %} {% block body %}
+<div style="margin-top: 30px;" class="container">
+    <div class="header">
+        <h2><b>View Claim</b></h2>
+    </div>
+    <div class="data">
+        <div class="data-item">
+            <span>User:</span>
+            <div>{{ user.name }}</div>
+        </div>
+        <div class="data-item">
+            <span>Gender:</span>
+            <div>{{ user.gender | title }}</div>
+        </div>
+        <div class="data-item">
+            <span>Age:</span>
+            <div>{{ user_age }} years old</div>
+        </div>
+        <div class="data-item">
+            <span>HMO:</span>
+            <div>{{ claim.hmo }}</div>
+        </div>
+        <div class="data-item">
+            <span>Status:</span>
+            <div>{{ claim.status | title }}</div>
+        </div>
+        <div class="data-item">
+            <span>Diagnosis:</span>
+            <div>{{ claim.diagnosis }}</div>
+        </div>
+
+        {% for service in services %}
+        <div class="data-item">
+            <span>Date for "{{ service.service_name }}" Service:</span>
+            <div>{{ service.service_date.strftime('%d %b %Y') }}</div>
+        </div>
+        <div class="data-item">
+            <span>Type for "{{ service.service_name }}" Service:</span>
+            <div>{{ service.type }}</div>
+        </div>
+        <div class="data-item">
+            <span>Provider name for "{{ service.service_name }}" Service:</span>
+            <div>{{ service.provider_name }}</div>
+        </div>
+        <div class="data-item">
+            <span>Charge for "{{ service.service_name }}" Service:</span>
+            <div>₦{{ service.cost_of_service }}</div>
+        </div>
+        {% endfor %}
+        <div class="data-item">
+            <span>Total Cost:</span>
+            <div>₦{{ claim.total_cost }}</div>
+        </div>
+        <div class="data-item">
+            <span>Tax:</span>
+            <div>₦{{ claim.final_cost - claim.total_cost }}</div>
+        </div>
+        <div class="data-item">
+            <span>Final Cost:</span>
+            <div>₦{{ claim.final_cost }}</div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/claim.js') }}"></script>
+
+<style>
+    .header {
+        color: #000;
+        padding: 20px 20px;
+        text-align: center;
+        text-decoration: underline;
+    }
+    .data {
+        padding: 20px;
+    }
+    .data-item {
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #e0e0e0;
+        padding-bottom: 5px;
+    }
+    .data-item:last-child {
+        border-bottom: none;
+    }
+    .data-item span {
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
