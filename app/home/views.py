@@ -1,19 +1,12 @@
 import datetime as dt
 from datetime import datetime
 
-from flask import (
-    current_app,
-    flash,
-    jsonify,
-    redirect,
-    render_template,
-    request,
-    url_for,
-)
+from flask import flash, jsonify, redirect, render_template, request, url_for
 
 from app import database
 from app.forms import AddUser
 from app.models import Claim, Service, User
+
 from . import home as home_blueprint
 
 
@@ -152,7 +145,6 @@ def create_claim():
         final_cost = request.form.get("final_cost")
 
         user = User.query.filter_by(name=user).first()
-        current_app.logger.warning(user)
 
         new_claim = Claim(
             user_id=user.id,
@@ -179,7 +171,6 @@ def create_claim():
         # Format dates
         service_date = []
         for d in dates:
-            current_app.logger.warning(d)
             service_date.append(datetime.strptime(d, "%Y-%m-%d").strftime("%d-%m-%Y"))
 
         # Get the above claim as foreign key for services
