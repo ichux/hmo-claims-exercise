@@ -1,4 +1,5 @@
 //  Service form instance
+var today = new Date().toISOString().split("T")[0];
 var serviceForm = `
                         <div class="row">
                         <div class="col-sm-4">
@@ -6,7 +7,7 @@ var serviceForm = `
                         </div>
                         <div class="col-sm-8">
                             <div class="form-group">
-                                <input type="date" name="service_date" class="form-control" placeholder="Service Date" required>
+                                <input type="date" name="service_date" class="form-control" placeholder="Service Date" max="${today}" required>
                             </div>
                         </div>
                         </div>
