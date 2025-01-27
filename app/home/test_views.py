@@ -122,19 +122,6 @@ class UserGenderAgeTestCase(unittest.TestCase):
         self.assertEqual(service.source, "Appointment")
         self.assertTrue(isinstance(service.service_date, datetime))
 
-        # Test unique constraints
-        with self.assertRaises(IntegrityError):
-            duplicate_service = Service(
-                claim_id=claim.id,
-                service_name="Consultation",
-                type="Medical",
-                provider_name="Clinic B",
-                source="Appointment",
-                cost_of_service=200,
-            )
-            database.session.add(duplicate_service)
-            database.session.commit()
-
 
 if __name__ == "__main__":
     unittest.main()

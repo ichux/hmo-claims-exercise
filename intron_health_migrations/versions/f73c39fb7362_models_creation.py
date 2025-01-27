@@ -1,8 +1,8 @@
-"""Added update
+"""models creation
 
-Revision ID: e99569a85afe
+Revision ID: f73c39fb7362
 Revises: 
-Create Date: 2025-01-23 17:21:24.768919
+Create Date: 2025-01-27 09:13:18.728190
 
 """
 
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 from alembic import op
 
 # revision identifiers, used by Alembic.
-revision = "e99569a85afe"
+revision = "f73c39fb7362"
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -36,9 +36,11 @@ def upgrade():
         sa.Column("diagnosis", sa.String(length=1000), nullable=True),
         sa.Column("hmo", sa.String(length=4), nullable=True),
         sa.Column("age", sa.Integer(), nullable=True),
+        sa.Column("is_male", sa.Boolean(), nullable=True),
         sa.Column("service_charge", sa.Integer(), nullable=True),
         sa.Column("total_cost", sa.Integer(), nullable=True),
         sa.Column("final_cost", sa.Integer(), nullable=True),
+        sa.Column("status", sa.Enum("in progress", "sent", "paid"), nullable=False),
         sa.ForeignKeyConstraint(
             ["user_id"],
             ["user.id"],
@@ -60,10 +62,6 @@ def upgrade():
             ["claim.id"],
         ),
         sa.PrimaryKeyConstraint("id"),
-        sa.UniqueConstraint("provider_name"),
-        sa.UniqueConstraint("service_name"),
-        sa.UniqueConstraint("source"),
-        sa.UniqueConstraint("type"),
     )
     # ### end Alembic commands ###
 

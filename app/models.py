@@ -50,12 +50,12 @@ class Service(database.Model):
     id = database.Column(database.Integer, autoincrement=True, primary_key=True)
     claim_id = database.Column(database.Integer, database.ForeignKey("claim.id"))
     service_date = database.Column(
-        database.DateTime, nullable=False, default=datetime.now()
+        database.DateTime, nullable=False, default=datetime.utcnow
     )
-    service_name = database.Column(database.String(100), nullable=False, unique=True)
-    type = database.Column(database.String(50), nullable=False, unique=True)
-    provider_name = database.Column(database.String(100), nullable=False, unique=True)
-    source = database.Column(database.String(100), nullable=False, unique=True)
+    service_name = database.Column(database.String(100), nullable=False)
+    type = database.Column(database.String(50), nullable=False)
+    provider_name = database.Column(database.String(100), nullable=False)
+    source = database.Column(database.String(100), nullable=False)
     cost_of_service = database.Column(database.Integer)
 
     def __repr__(self):
